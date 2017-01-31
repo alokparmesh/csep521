@@ -22,7 +22,7 @@ def makeHeatMap(data, names, color, outputFileName):
         ax.xaxis.tick_top()
 
         ax.set_xticklabels(range(1, 21))
-        ax.set_yticklabels(range(1, 21))
+        ax.set_yticklabels(names)
 
         plt.tight_layout()
 
@@ -30,5 +30,6 @@ def makeHeatMap(data, names, color, outputFileName):
         plt.close()
 
 data = pd.read_csv("output.csv", index_col=False, header=None)
-makeHeatMap(data,"", plt.cm.Blues, "heatplot.png")
+names = pd.read_csv("groups.csv", index_col=False, header=None)
+makeHeatMap(data, names[0].values, plt.cm.Blues, "heatplot.png")
 
