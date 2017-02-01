@@ -21,9 +21,10 @@ def makeHeatMap(data, names, color, outputFileName):
         ax.invert_yaxis()
         ax.xaxis.tick_top()
 
-        ax.set_xticklabels(range(1, 21))
+        ax.set_xticklabels(names)
         ax.set_yticklabels(names)
 
+        plt.xticks(rotation=90)
         plt.tight_layout()
 
         plt.savefig(outputFileName, format = 'png')

@@ -7,20 +7,28 @@ using CommandLine;
 
 namespace hw3
 {
-    public enum SimilarityFunctions
+    public enum SimilarityFunction
     {
         Jaccard,
         Cosine,
         LSquare
     }
 
-    public enum SimilarityModes
+    public enum ExecutionMode
     {
         AllWayAverage,
-        MostNearestNeighbor
+        MostNearestNeighbor,
+        MostNearestNeighborWithRandomProjection,
+        RandomProjectionCosineScatter
     }
 
-    public class SimilarityOption
+    public enum RandomProjectionMode
+    {
+        Gaussian,
+        Binary
+    }
+
+    public class ExecutionOption
     {
         [Option("dataFile", DefaultValue = "data50.csv", HelpText = "Data file")]
         public string DataFile { get; set; }
@@ -31,10 +39,16 @@ namespace hw3
         [Option("groupsFile", DefaultValue = "groups.csv", HelpText = "Groups file")]
         public string GroupsFile { get; set; }
 
-        [Option("similarityFunction", DefaultValue = SimilarityFunctions.Jaccard, HelpText = "Similarity function choice")]
-        public SimilarityFunctions SimilarityFunction { get; set; }
+        [Option("similarityFunction", DefaultValue = SimilarityFunction.Cosine, HelpText = "Similarity function choice")]
+        public SimilarityFunction SimilarityFunction { get; set; }
 
-        [Option("similarityMode", DefaultValue = SimilarityModes.AllWayAverage, HelpText = "Similarity mode choice")]
-        public SimilarityModes SimilarityMode { get; set; }
+        [Option("executionMode", DefaultValue = ExecutionMode.MostNearestNeighborWithRandomProjection, HelpText = "Similarity mode choice")]
+        public ExecutionMode ExecutionMode { get; set; }
+
+        [Option("randomProjectionDimCount", DefaultValue = 50, HelpText = "Random projection dimension count")]
+        public int RandomProjectionDimCount { get; set; }
+
+        [Option("randomProjectionMode", DefaultValue = RandomProjectionMode.Gaussian, HelpText = "Random projection mode")]
+        public RandomProjectionMode RandomProjectionMode { get; set; }
     }
 }
